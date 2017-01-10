@@ -1,0 +1,54 @@
+<nav>
+    <div class="nav-wrapper blue">
+        &nbsp&nbsp 플라스크 소전
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            {% if not 'user_id' in session %}
+            <li><a href="/login">로그인</a></li>
+            <li><a href="/signup">회원가입</a></li>
+            {% else %}
+            <li>{{g.user.username}}님 환영합니다.</li>
+            <li><a href="/logout">로그아웃</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+{% extends 'layout.html' %}
+{% block content %}
+<div class="card">
+    <table class="center striped responsive-table ">
+        {% for comment in comments %}
+        <tr>
+            <td><a href="/users/{{comment.writer.id}}">{{comment.writer.username}}</a></td>
+            <td>{{comment.content| safe}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<a class="btn blue" href="/post_comment">작성</a>
+<br>
+<br>
+<br>
+
+<div class="row">
+    <div class="col s12 m4 l2">
+        {% if page > 1 %}
+        <a class="waves-effect waves-light btn blue" href="/?page={{page-1}}">이전</a>
+        {% else %}
+        <a class="disabled  btn" href="/?page={{page-1}}">이전</a>
+        {% endif %}
+    </div>
+    <div class="col s12 m4 l8 center">
+        {% for j in range(1,maxpage+1) %}
+
+        <a href="/?page={{j}}">{{j}}</a>
+        {% endfor %}
+    </div>
+    <div class="col s12 m4 l2">
+        {% if page < maxpage %}
+        <a class="waves-effect waves-light btn blue" href="/?page={{page+1}}">다음</a>
+        {% else %}
+        <a class="btn disabled " href="/?page={{page+1}}">다음</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

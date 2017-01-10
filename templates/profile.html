@@ -1,0 +1,31 @@
+<nav>
+    <div class="nav-wrapper blue">
+        &nbsp&nbsp 플라스크 소전
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            {% if not 'user_id' in session %}
+            <li><a href="/login">로그인</a></li>
+            <li><a href="/signup">회원가입</a></li>
+            {% else %}
+            <li>{{g.user.username}}님 환영합니다.</li>
+            <li><a href="/logout">로그아웃</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+{% extends 'layout.html' %}
+{% block content %}
+<div class="card">
+    <table class="center striped responsive-table ">
+        {% for msg in msgs%}
+        <tr>
+            <td> {{msg.writer.username}}</td>
+            <td>{{msg.content| safe}}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td> 암것도 없습니다.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

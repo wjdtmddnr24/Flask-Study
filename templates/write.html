@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block content %}
+<form action="/post_comment" method="post">
+    <table>
+        <tr>
+            <td><textarea name="name" rows="8" cols="80" placeholder="덧글 내용"></textarea></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><input class="btn blue" type="submit" value="작성"></td>
+        </tr>
+    </table>
+</form>
+{% endblock %}
